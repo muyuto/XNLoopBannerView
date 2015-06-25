@@ -33,7 +33,7 @@
 
 
 
-static NSString *CellIndentifier = @"XNLoopBannerViewCell";
+static NSString *CellIdentifier = @"XNLoopBannerViewCell";
 
 @interface XNLoopBannerView () <UICollectionViewDataSource, UICollectionViewDelegate>
 @property(nonatomic, strong) NSArray *urls;
@@ -97,7 +97,7 @@ static NSString *CellIndentifier = @"XNLoopBannerViewCell";
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    XNLoopBannerViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:CellIndentifier forIndexPath:indexPath];
+    XNLoopBannerViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:CellIdentifier forIndexPath:indexPath];
     if (0 == indexPath.item) {
         [cell.imageView sd_setImageWithURL:[NSURL URLWithString:[self.urls lastObject]]];
     } else if (self.urls.count + 1 == indexPath.item) {
@@ -197,7 +197,7 @@ static NSString *CellIndentifier = @"XNLoopBannerViewCell";
         _collectionView.dataSource = self;
         _collectionView.delegate = self;
         [_collectionView registerClass:[XNLoopBannerViewCell class]
-            forCellWithReuseIdentifier:CellIndentifier];
+            forCellWithReuseIdentifier:CellIdentifier];
     }
     return _collectionView;
 }
