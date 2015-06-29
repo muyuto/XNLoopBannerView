@@ -142,6 +142,9 @@ static NSString *CellIdentifier = @"XNLoopBannerViewCell";
 
 #pragma mark - Event Response
 - (void)scrollToNext {
+    if (self.currentPage > self.urls.count) {
+        _currentPage %= self.urls.count;
+    }
     self.currentPage++;
 }
 
