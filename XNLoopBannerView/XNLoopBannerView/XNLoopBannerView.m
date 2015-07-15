@@ -7,7 +7,8 @@
 //
 
 #import "XNLoopBannerView.h"
-#import <SDWebImage/UIImageView+WebCache.h>
+#import <UIImageView+WebCache.h>
+#import <SDWebImagePrefetcher.h>
 
 @interface XNLoopBannerViewCell : UICollectionViewCell
 @property(nonatomic, strong) UIImageView *imageView;
@@ -55,17 +56,16 @@ static NSString *CellIdentifier = @"XNLoopBannerViewCell";
     [self invalidateTimer];
 }
 
-- (instancetype)initWithFrame:(CGRect)frame imageUrls:(NSArray *)urlStrings {
+- (instancetype)initWithFrame:(CGRect)frame imageUrls:(NSArray *)imageUrls {
     self = [super initWithFrame:frame];
     if (self) {
-        for (id url in urlStrings) {
-            NSAssert([url isKindOfClass:[NSString class]], @"object in \"urls\" must be kind of NSString class");
-        }
-        self.urls = urlStrings;
+        self.urls = [self convertToNSURLArrayFrom:imageUrls];
+        
+        [[SDWebImagePrefetcher sharedImagePrefetcher] prefetchURLs:self.urls];
         
         [self addSubview:self.collectionView];
         [self addSubview:self.pageControl];
-        self.pageControl.numberOfPages = urlStrings.count;
+        self.pageControl.numberOfPages = imageUrls.count;
         
         [self setup];
     }
@@ -99,11 +99,11 @@ static NSString *CellIdentifier = @"XNLoopBannerViewCell";
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     XNLoopBannerViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:CellIdentifier forIndexPath:indexPath];
     if (0 == indexPath.item) {
-        [cell.imageView sd_setImageWithURL:[NSURL URLWithString:[self.urls lastObject]]];
+        [cell.imageView sd_setImageWithURL:[self.urls lastObject]];
     } else if (self.urls.count + 1 == indexPath.item) {
-        [cell.imageView sd_setImageWithURL:[NSURL URLWithString:[self.urls firstObject]]];
+        [cell.imageView sd_setImageWithURL:[self.urls firstObject]];
     } else {
-        [cell.imageView sd_setImageWithURL:[NSURL URLWithString:self.urls[indexPath.item - 1]]];
+        [cell.imageView sd_setImageWithURL:self.urls[indexPath.item - 1]];
     }
     
     return cell;
@@ -113,8 +113,7 @@ static NSString *CellIdentifier = @"XNLoopBannerViewCell";
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     [collectionView deselectItemAtIndexPath:indexPath animated:YES];
     
-    if ([self.bannerDelegate conformsToProtocol:@protocol(XNLoopBannerViewDelegate)] &&
-        [self.bannerDelegate respondsToSelector:@selector(bannerView:didSelectAtIndex:)]) {
+    if ([self.bannerDelegate respondsToSelector:@selector(bannerView:didSelectAtIndex:)]) {
         [self.bannerDelegate bannerView:self didSelectAtIndex:self.currentPage];
     }
 }
@@ -190,11 +189,26 @@ static NSString *CellIdentifier = @"XNLoopBannerViewCell";
     }
 }
 
+- (NSArray *)convertToNSURLArrayFrom:(NSArray *)urlArray {
+    NSMutableArray *convertedArray = [NSMutableArray array];
+    for (id url in urlArray) {
+        NSAssert([url isKindOfClass:[NSURL class]] || [url isKindOfClass:[NSString class]],
+                 @"*** object in array \"imageUrls\" must be kind of NSString or NSURL class");
+        if ([url isKindOfClass:[NSURL class]]) {
+            [convertedArray addObject:url];
+        } else if ([url isKindOfClass:[NSString class]]) {
+            [convertedArray addObject:[NSURL URLWithString:url]];
+        }
+    }
+    return [convertedArray copy];
+}
+
 #pragma mark - Getters && Setters
 - (UICollectionView *)collectionView {
     if (!_collectionView) {
         _collectionView = [[UICollectionView alloc] initWithFrame:CGRectZero
                                              collectionViewLayout:self.flowLayout];
+        _collectionView.backgroundColor = [UIColor clearColor];
         _collectionView.pagingEnabled = YES;
         _collectionView.showsHorizontalScrollIndicator = NO;
         _collectionView.dataSource = self;

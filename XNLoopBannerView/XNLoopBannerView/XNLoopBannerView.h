@@ -25,11 +25,13 @@
 @property(nonatomic) NSTimeInterval animationDuration; //default is 3s.
 
 /**
- *   Don't use "pageControl.frame = " to change frame of pageControl. Default is CGRectMake(0, self.frame.size.height - 22, self.frame.size.width, 22)
+ *  Do NOT use ".pageControl.frame = " to change frame of pageControl. Default is CGRectMake(0,
+ *  self.frame.size.height - 22, self.frame.size.width, 22).
  */
 @property(nonatomic) CGRect pageControlFrame;
 
-- (instancetype)initWithFrame:(CGRect)frame imageUrls:(NSArray *)urlStrings;
+//  object in "imageUrls" must be kind of NSString or NSURL class"
+- (instancetype)initWithFrame:(CGRect)frame imageUrls:(NSArray *)imageUrls;
 
 - (void)setCurrentPage:(NSInteger)currentPage animated:(BOOL)animated;
 
