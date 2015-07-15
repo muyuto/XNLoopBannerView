@@ -4,7 +4,7 @@ XNLoopBannerView is an auto(if needed) loop scroll view with [SDWebImage](https:
 
 # Example Usage
 
-	self.bannerView = [[XNLoopBannerView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, 300) imageUrls:imageUrlStringArray];
+	self.bannerView = [[XNLoopBannerView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, 300) imageUrls:imageUrlArray];
 	self.bannerView.animationDuration = 5;
 	[self.view addSubview:self.bannerView];
 
