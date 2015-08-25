@@ -13,7 +13,7 @@
 		794897801B297A04009FA6FC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7948977E1B297A04009FA6FC /* Main.storyboard */; };
 		794897821B297A04009FA6FC /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 794897811B297A04009FA6FC /* Images.xcassets */; };
 		794897851B297A04009FA6FC /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 794897831B297A04009FA6FC /* LaunchScreen.xib */; };
-		7948979D1B297A53009FA6FC /* XNLoopBannerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7948979C1B297A53009FA6FC /* XNLoopBannerView.m */; };
+		79CFA03E1B8C506000E5A32B /* XNLoopBannerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 79CFA03D1B8C506000E5A32B /* XNLoopBannerView.m */; };
 		D6339B1B9F60B7ABE44E656A /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F60997E2AB4758B1FDBD723 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -30,8 +30,8 @@
 		7948977F1B297A04009FA6FC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		794897811B297A04009FA6FC /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		794897841B297A04009FA6FC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		7948979B1B297A53009FA6FC /* XNLoopBannerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XNLoopBannerView.h; sourceTree = "<group>"; };
-		7948979C1B297A53009FA6FC /* XNLoopBannerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XNLoopBannerView.m; sourceTree = "<group>"; };
+		79CFA03C1B8C506000E5A32B /* XNLoopBannerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XNLoopBannerView.h; sourceTree = "<group>"; };
+		79CFA03D1B8C506000E5A32B /* XNLoopBannerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XNLoopBannerView.m; sourceTree = "<group>"; };
 		F789601FC10367082E234B7E /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -68,7 +68,7 @@
 		794897731B297A04009FA6FC /* XNLoopBannerView */ = {
 			isa = PBXGroup;
 			children = (
-				7948979A1B297A42009FA6FC /* XNLoopBannerView */,
+				79CFA03B1B8C506000E5A32B /* XNLoopBannerView */,
 				794897781B297A04009FA6FC /* AppDelegate.h */,
 				794897791B297A04009FA6FC /* AppDelegate.m */,
 				7948977B1B297A04009FA6FC /* ViewController.h */,
@@ -90,13 +90,14 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		7948979A1B297A42009FA6FC /* XNLoopBannerView */ = {
+		79CFA03B1B8C506000E5A32B /* XNLoopBannerView */ = {
 			isa = PBXGroup;
 			children = (
-				7948979B1B297A53009FA6FC /* XNLoopBannerView.h */,
-				7948979C1B297A53009FA6FC /* XNLoopBannerView.m */,
+				79CFA03C1B8C506000E5A32B /* XNLoopBannerView.h */,
+				79CFA03D1B8C506000E5A32B /* XNLoopBannerView.m */,
 			);
-			path = XNLoopBannerView;
+			name = XNLoopBannerView;
+			path = ../../XNLoopBannerView;
 			sourceTree = "<group>";
 		};
 		CC9D9B05BE772C965680AFF6 /* Pods */ = {
@@ -222,8 +223,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				7948977D1B297A04009FA6FC /* ViewController.m in Sources */,
-				7948979D1B297A53009FA6FC /* XNLoopBannerView.m in Sources */,
 				7948977A1B297A04009FA6FC /* AppDelegate.m in Sources */,
+				79CFA03E1B8C506000E5A32B /* XNLoopBannerView.m in Sources */,
 				794897771B297A04009FA6FC /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
