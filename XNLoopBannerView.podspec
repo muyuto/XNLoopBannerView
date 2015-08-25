@@ -3,7 +3,7 @@ Pod::Spec.new do |s|
   s.version      = "0.1"
   s.summary      = "An auto loop scroll view."
   s.homepage     = "https://github.com/xn1108100154/XNLoopBannerView"
-  # s.screenshots  = "www.example.com/screenshots_1.gif", "www.example.com/screenshots_2.gif"
+  s.screenshots  = "https://raw.githubusercontent.com/xn1108100154/XNLoopBannerView/master/demo.gif"
   s.license      = "MIT"
   s.author       = { "XuNing" => "ningxu.ios@gmail.com" }
   s.platform     = :ios, "7.0"
