@@ -37,7 +37,7 @@
 static NSString *CellIdentifier = @"XNLoopBannerViewCell";
 
 @interface XNLoopBannerView () <UICollectionViewDataSource, UICollectionViewDelegate>
-@property(nonatomic, strong) NSArray *urls;
+@property(nonatomic, copy) NSArray *urls;
 @property(nonatomic, strong) NSTimer *timer;
 @property(nonatomic) BOOL useCustomPageControlFrame;
 
@@ -61,11 +61,10 @@ static NSString *CellIdentifier = @"XNLoopBannerViewCell";
     if (self) {
         self.urls = [self convertToNSURLArrayFrom:imageUrls];
         
-        [[SDWebImagePrefetcher sharedImagePrefetcher] prefetchURLs:self.urls];
+        [self prefetchImages];
         
         [self addSubview:self.collectionView];
         [self addSubview:self.pageControl];
-        self.pageControl.numberOfPages = imageUrls.count;
         
         [self setup];
     }
@@ -99,11 +98,14 @@ static NSString *CellIdentifier = @"XNLoopBannerViewCell";
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     XNLoopBannerViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:CellIdentifier forIndexPath:indexPath];
     if (0 == indexPath.item) {
-        [cell.imageView sd_setImageWithURL:[self.urls lastObject]];
+        [cell.imageView sd_setImageWithURL:[self.urls lastObject]
+                          placeholderImage:self.placeholderImage];
     } else if (self.urls.count + 1 == indexPath.item) {
-        [cell.imageView sd_setImageWithURL:[self.urls firstObject]];
+        [cell.imageView sd_setImageWithURL:[self.urls firstObject]
+                          placeholderImage:self.placeholderImage];
     } else {
-        [cell.imageView sd_setImageWithURL:self.urls[indexPath.item - 1]];
+        [cell.imageView sd_setImageWithURL:self.urls[indexPath.item - 1]
+                          placeholderImage:self.placeholderImage];
     }
     
     return cell;
@@ -149,6 +151,7 @@ static NSString *CellIdentifier = @"XNLoopBannerViewCell";
 
 #pragma mark - Private Method
 - (void)setup {
+    self.pageControl.numberOfPages = self.urls.count;
     self.animationDuration = 3;
     self.autoScroll = YES;
 }
@@ -201,6 +204,32 @@ static NSString *CellIdentifier = @"XNLoopBannerViewCell";
         }
     }
     return [convertedArray copy];
+}
+
+- (void)prefetchImages {
+    if (self.urls.count > 1) {
+        NSMutableArray *urlsExceptFirst = [self.urls mutableCopy];
+        [urlsExceptFirst removeObjectAtIndex:0];
+        [[SDWebImagePrefetcher sharedImagePrefetcher] prefetchURLs:urlsExceptFirst];
+    }
+}
+
+- (void)reloadWithImageUrls:(NSArray *)imageUrls {
+    NSArray *array = [self convertToNSURLArrayFrom:imageUrls];
+    if (![self.urls isEqualToArray:array]) {
+        self.urls = [array copy];
+        
+        [self prefetchImages];
+        self.pageControl.numberOfPages = self.urls.count;
+        self.pageControl.currentPage = 0;
+        [self setCurrentPage:0 animated:NO];
+        [self.collectionView reloadData];
+        
+        if (self.autoScroll) {
+            [self invalidateTimer];
+            [self setupTimer];
+        }
+    }
 }
 
 #pragma mark - Getters && Setters

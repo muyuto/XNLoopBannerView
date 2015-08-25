@@ -23,15 +23,17 @@
 @property(nonatomic) NSInteger currentPage; //default is 0.
 @property(nonatomic) BOOL autoScroll; //default is YES.
 @property(nonatomic) NSTimeInterval animationDuration; //default is 3s.
+@property(nonatomic, strong) UIImage *placeholderImage;
 
 /**
- *  Do NOT use ".pageControl.frame = " to change frame of pageControl. Default is CGRectMake(0,
+ *  do NOT use ".pageControl.frame = " to change frame of pageControl. Default is CGRectMake(0,
  *  self.frame.size.height - 22, self.frame.size.width, 22).
  */
 @property(nonatomic) CGRect pageControlFrame;
 
 //  object in "imageUrls" must be kind of NSString or NSURL class"
 - (instancetype)initWithFrame:(CGRect)frame imageUrls:(NSArray *)imageUrls;
+- (void)reloadWithImageUrls:(NSArray *)imageUrls;
 
 - (void)setCurrentPage:(NSInteger)currentPage animated:(BOOL)animated;
 
