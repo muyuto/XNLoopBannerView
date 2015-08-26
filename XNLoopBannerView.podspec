@@ -7,7 +7,7 @@ Pod::Spec.new do |s|
   s.license      = "MIT"
   s.author       = { "XuNing" => "ningxu.ios@gmail.com" }
   s.platform     = :ios, "7.0"
-  s.source       = { :git => "https://github.com/xn1108100154/XNLoopBannerView", :tag => s.version.to_s }
+  s.source       = { :git => "https://github.com/xn1108100154/XNLoopBannerView.git", :tag => s.version.to_s }
   s.source_files = "XNLoopBannerView/*.{h,m}"
   s.requires_arc = true
 

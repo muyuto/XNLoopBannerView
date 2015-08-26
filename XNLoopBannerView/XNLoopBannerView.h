@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <SMPageControl.h>
+#import <SMPageControl/SMPageControl.h>
 
 @class XNLoopBannerView;
 @protocol XNLoopBannerViewDelegate <NSObject>

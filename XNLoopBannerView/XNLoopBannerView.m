@@ -7,8 +7,8 @@
 //
 
 #import "XNLoopBannerView.h"
-#import <UIImageView+WebCache.h>
-#import <SDWebImagePrefetcher.h>
+#import <SDWebImage/UIImageView+WebCache.h>
+#import <SDWebImage/SDWebImagePrefetcher.h>
 
 @interface XNLoopBannerViewCell : UICollectionViewCell
 @property(nonatomic, strong) UIImageView *imageView;
