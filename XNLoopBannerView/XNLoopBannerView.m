@@ -122,9 +122,9 @@ static NSString *CellIdentifier = @"XNLoopBannerViewCell";
 
 #pragma mark - UIScrollViewDelegate
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    if (0 == scrollView.contentOffset.x) {
+    if (0 >= scrollView.contentOffset.x) {
         [self collectionViewScrollToRealPage:self.urls.count];
-    } else if ((self.urls.count + 1) * scrollView.frame.size.width == scrollView.contentOffset.x) {
+    } else if ((self.urls.count + 1) * scrollView.frame.size.width <= scrollView.contentOffset.x) {
         [self collectionViewScrollToRealPage:1];
     } else {
         _currentPage = scrollView.contentOffset.x / scrollView.frame.size.width - 1;
