@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "XNLoopBannerView"
-  s.version      = "0.1"
+  s.version      = "0.2"
   s.summary      = "An auto loop scroll view."
   s.homepage     = "https://github.com/xn1108100154/XNLoopBannerView"
   s.screenshots  = "https://raw.githubusercontent.com/xn1108100154/XNLoopBannerView/master/demo.gif"
