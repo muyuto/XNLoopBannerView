@@ -19,7 +19,9 @@ XNLoopBannerView is an auto(if needed) loop scroll view with [SDWebImage](https:
 
 * From [CocoaPods](https://cocoapods.org/): 
 
-	pod 'XNLoopBannerView'
+```ruby
+pod 'XNLoopBannerView'
+```
 
 * Without CocoaPods: 
 Drag the `XNLoopBannerView` folder to your project (I assume you have already installed SDWebImage and SMPageControl).
